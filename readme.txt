@@ -53,3 +53,27 @@ node.js plugin express.js
     });
     
     //run file: >node index.js
+
+
+*//----structure
+    1. src folder
+        a. controller
+            - teacher.controller.js
+        b. config
+        c. route
+            - teacher.route.js
+
+*//------- import and export
+    1. import   
+        const {teacher} = require("./src/route/teacher.route");
+    2. export
+        module.exports = { teacher }
+    3. call for using
+        teacher(app);
+
+*//------- auto refresh after change fille (nodemon) ------------
+    npm install --save-dev nodemon
+    add "start": "nodemon index.js" to script block in package.json
+
+*//------- Express.js Method ---------
+    
