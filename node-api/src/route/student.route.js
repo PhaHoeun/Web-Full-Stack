@@ -2,10 +2,10 @@ const { getListStudent, createStudent, deleteStudent, updateStudent } = require(
 
 
 const student = (app) => {
-    app.get("/api/student/getList", getListStudent);
-    app.get("/api/student/create", createStudent);
-    app.get("/api/student/update", updateStudent);
-    app.get("/api/student/delete", deleteStudent);
+    app.get("/api/student", getListStudent);
+    app.post("/api/student", createStudent);
+    app.put("/api/student", updateStudent);
+    app.delete("/api/student", deleteStudent);
 }
 
 module.exports = {

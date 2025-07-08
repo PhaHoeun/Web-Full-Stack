@@ -1,5 +1,6 @@
 const getListStudent = (req, res) => {
     res.send('get list student');
+
 }
 const createStudent = (req, res) => {
     res.send('create student');

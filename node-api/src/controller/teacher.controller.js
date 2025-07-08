@@ -1,20 +1,35 @@
 
 const getListTeacher = async (req, res) => {
-    try {
-        // Simulate fetching data from a database
-        const teachers = [
-            { name: "Alice Smith", age: 35, subject: "Physics" },
-            { name: "Bob Johnson", age: 40, subject: "Chemistry" }
-        ];
-        res.status(200).json(teachers);
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching teachers" });
-    }
+
+    //get parameter query
+    let testQuery = req.query;
+    const teachers = [
+        { id: 1, name: "Pha", age: 35, subject: "Physics" },
+        { id: 2, name: "Ra Smach", age: 40, subject: "Chemistry" }
+    ];
+
+    res.json({
+        'teacher': [],
+        'query': testQuery,
+        //or
+        'name': testQuery.name,
+        //or
+        'id': req.query.id,
+    });
+}
+
+//get teacher detail
+const getTeacherDetail = (req, res) => {
+    res.json({
+        'param': req.params
+    });
 }
 
 //create a teacher
 const createTeacher = async (req, res) => {
-    res.send('create teacher');
+    res.json({
+        'body': req.body
+    })
 }
 
 //update a teacher
@@ -31,5 +46,6 @@ module.exports = {
     getListTeacher,
     createTeacher,
     updateTeacher,
-    deleteTeacher
+    deleteTeacher,
+    getTeacherDetail
 };

@@ -1,5 +1,5 @@
 //import the controller
-const { getListTeacher, updateTeacher, createTeacher, deleteTeacher } = require("../controller/teacher.controller")
+const { getListTeacher, updateTeacher, createTeacher, deleteTeacher, getTeacherDetail } = require("../controller/teacher.controller")
 
 //register a teacher route
 const teacher = (app) => { //arrow function
@@ -37,10 +37,13 @@ const teacher = (app) => { //arrow function
     //-------befor using controller-----------
 
     //--------after using controller-----------
-    app.get("/api/teacher/getList", getListTeacher )
-    app.get("/api/teacher/create", createTeacher )
-    app.get("/api/teacher/update", updateTeacher )
-    app.get("/api/teacher/delete", deleteTeacher )
+    app.get("/api/teacher", getListTeacher )
+    app.get("/api/teacher/:id", getTeacherDetail)
+    //or multiple param
+    // app.get("/api/teacher/:id/:name", getTeacherDetail)
+    app.post("/api/teacher", createTeacher )
+    app.put("/api/teacher", updateTeacher )
+    app.delete("/api/teacher", deleteTeacher )
     //--------after using controller-----------
 }
 
