@@ -138,6 +138,7 @@ node -v : check node version
             UPDATE role SET Name='Test02', Code='test02' WHERE Id=8;
 
 # Integrate Node with MySQL
+    //file conntion create file db.js in config // driver
   > npm install mysql2
     const mysql = require("mysql2/promise")
     const db = mysql.createPool({
@@ -150,3 +151,7 @@ node -v : check node version
     });
 
     module.exports = db;
+  > in controller
+    - list data from database
+    - create new record to database
+    - update/delete

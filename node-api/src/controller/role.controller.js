@@ -1,0 +1,73 @@
+const db = require('../config/db')
+
+const getList = async (req, res) => {
+    try {
+        //query from db
+        const [role] = await db.query("SELECT * FROM role;");
+        //const [data1] = await db.query("SELECT * FROM customer;");
+        // const [data2] = await db.query("SELECT * FROM teacher;");
+
+        res.json({
+            role: role,
+            //list1:data1,
+            //list2:data2,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
+
+}
+
+const getDetail = async (req, res) => {
+   
+    try {
+        var param = {
+            Id: req.params.id,
+        };
+        const [role] = await db.query("SELECT * FROM role WHERE Id = :Id", param); //more secure
+        res.json({
+            role: role,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
+}
+
+const create = async (req, res) => {
+    try {
+        var param = {
+            Name: req.body.Name,
+            Code: req.body.Code,
+        };
+        const [role] = await db.query("INSERT INTO role (Name, Code) VALUES (:Name, :Code)", param); //more secure
+        res.json({
+            message: 'Create Role Successfully!',
+            role: role,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
+}
+
+const update = async (req, res) => {
+
+}
+
+const remove = async (req, res) => {
+
+}
+
+module.exports = {
+    getList,
+    getDetail,
+    create,
+    update,
+    remove,
+}
+
