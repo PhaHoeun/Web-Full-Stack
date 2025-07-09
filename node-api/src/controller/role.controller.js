@@ -21,7 +21,7 @@ const getList = async (req, res) => {
 }
 
 const getDetail = async (req, res) => {
-   
+
     try {
         var param = {
             Id: req.params.id,
@@ -56,7 +56,22 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-
+    try {
+        var param = {
+            Id: req.body.Id,
+            Name: req.body.Name,
+            Code: req.body.Code,
+        };
+        const [role] = await db.query("UPDATE role SET Name = :Name, Code = :Code WHERE Id = :Id", param); //more secure
+        res.json({
+            message: 'Update Role Successfully!',
+            role: role,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 const remove = async (req, res) => {

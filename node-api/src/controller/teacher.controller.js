@@ -1,40 +1,76 @@
+const db = require('../config/db')
 
 const getListTeacher = async (req, res) => {
 
-    //get parameter query
-    let testQuery = req.query;
-    const teachers = [
-        { id: 1, name: "Pha", age: 35, subject: "Physics" },
-        { id: 2, name: "Ra Smach", age: 40, subject: "Chemistry" }
-    ];
+    try {
+        //query from db
+        const [teacher] = await db.query("SELECT * FROM teacher;");
 
-    res.json({
-        'teacher': [],
-        'query': testQuery,
-        //or
-        'name': testQuery.name,
-        //or
-        'id': req.query.id,
-    });
+        res.json({
+            teacher: teacher,
+
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 //get teacher detail
-const getTeacherDetail = (req, res) => {
-    res.json({
-        'param': req.params
-    });
+const getTeacherDetail = async (req, res) => {
+    try {
+        var param = {
+            id: req.params.id,
+        };
+        const [teacher] = await db.query("SELECT * FROM teacher WHERE id = :id", param); //more secure
+        res.json({
+            teacher: teacher[0] || null,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 //create a teacher
 const createTeacher = async (req, res) => {
-    res.json({
-        'body': req.body
-    })
+    try {
+        var param = {
+            name: req.body.name,
+            subject: req.body.subject,
+        };
+        const [teacher] = await db.query("INSERT INTO teacher (name, subject) VALUES (:name, :subject)", param); //more secure
+        res.json({
+            message: 'Create Teacher Successfully!',
+            teacher: teacher,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 //update a teacher
 const updateTeacher = async (req, res) => {
-    res.send('update teacher');
+    try {
+        var param = {
+            id: req.body.id,
+            name: req.body.name,
+            subject: req.body.subject,
+        };
+        const [teacher] = await db.query("UPDATE teacher SET name = :name, subject = :subject WHERE id = :id", param); //more secure
+        res.json({
+            message: 'Update Teacher Successfully!',
+            teacher: teacher,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 //delete a teacher

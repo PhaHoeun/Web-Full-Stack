@@ -5,7 +5,7 @@ const db = mysql.createPool({
     user: 'root',
     password: '',
     database: 'full_stack',
-    port: 6306,
+    port: 3306, //6306,
     namedPlaceholders: true,
 });
 
