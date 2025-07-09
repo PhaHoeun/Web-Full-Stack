@@ -42,8 +42,8 @@ const teacher = (app) => { //arrow function
     //or multiple param
     // app.get("/api/teacher/:id/:name", getTeacherDetail)
     app.post("/api/teacher", createTeacher )
-    app.put("/api/teacher", updateTeacher )
-    app.delete("/api/teacher", deleteTeacher )
+    app.put("/api/teacher/:id", updateTeacher )
+    app.delete("/api/teacher/:id", deleteTeacher )
     //--------after using controller-----------
 }
 

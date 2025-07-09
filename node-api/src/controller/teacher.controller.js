@@ -57,7 +57,7 @@ const createTeacher = async (req, res) => {
 const updateTeacher = async (req, res) => {
     try {
         var param = {
-            id: req.body.id,
+            id: req.params.id,
             name: req.body.name,
             subject: req.body.subject,
         };
@@ -75,7 +75,20 @@ const updateTeacher = async (req, res) => {
 
 //delete a teacher
 const deleteTeacher = async (req, res) => {
-    res.send('delete teacher');
+    try {
+        var param = {
+            id: req.params.id,
+        };
+        const [teacher] = await db.query("DELETE FROM teacher WHERE id = :id", param); //more secure
+        res.json({
+            message: 'Delete Teacher Successfully!',
+            teacher: teacher,
+        });
+    } catch (e) {
+        res.json({
+            error: e,
+        });
+    }
 }
 
 module.exports = {
