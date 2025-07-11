@@ -3,7 +3,7 @@ const db = require('../config/db')
 const getList = async (req, res) => {
     try {
         //query from db
-        const [role] = await db.query("SELECT * FROM role;");
+        const [role] = await db.queryss("SELECT * FROM role;");
         //const [data1] = await db.query("SELECT * FROM customer;");
         // const [data2] = await db.query("SELECT * FROM teacher;");
 
@@ -13,8 +13,10 @@ const getList = async (req, res) => {
             //list2:data2,
         });
     } catch (e) {
-        res.json({
-            error: e,
+        console.log("error get role list ------->>> : " + e);
+        //send message
+        res.status(500).send({
+            error: "Internal Server Error!"
         });
     }
 
@@ -31,8 +33,13 @@ const getDetail = async (req, res) => {
             role: role,
         });
     } catch (e) {
-        res.json({
-            error: e,
+        // res.json({
+        //     error: e,
+        // });
+
+        console.log("error get role detail ------->>> : " + e);
+        res.status(500).send({
+            error: "Internal Server Error!"
         });
     }
 }
@@ -49,8 +56,12 @@ const create = async (req, res) => {
             role: role,
         });
     } catch (e) {
-        res.json({
-            error: e,
+        // res.json({
+        //     error: e,
+        // });
+        console.log("error create role ------->>> : " + e);
+        res.status(500).send({
+            error: "Internal Server Error!"
         });
     }
 }
@@ -68,14 +79,26 @@ const update = async (req, res) => {
             role: role,
         });
     } catch (e) {
-        res.json({
-            error: e,
-        });
+        console.log("error update role ------->>> : " + e);
     }
 }
 
 const remove = async (req, res) => {
-
+    try {
+        var param = {
+            Id: req.params.id,
+        };
+        const [role] = await db.query("DELETE FROM teacher WHERE Id = :Id", param); //more secure
+        res.json({
+            message: 'Delete Role Successfully!',
+            role: role,
+        });
+    } catch (e) {
+        console.log("error delete role ------->>> : " + e);
+        res.status(500).send({
+            error: "Internal Server Error!"
+        });
+    }
 }
 
 module.exports = {

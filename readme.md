@@ -155,3 +155,22 @@ node -v : check node version
     - list data from database
     - create new record to database
     - update/delete
+
+# Check ERROR
+  > Database
+    - start server mysql
+    - connection to database
+  > sql
+    - insert, update, delete, select correctly
+  > try catch
+    - add try and catch all function
+  > console.log function in node.js
+  > log error file
+    - create function log error
+        //create file config/service.js
+            . npm install moment
+  > validate required field
+  > Status
+    - 200: OK
+    - 404: Route not found
+    - 500: Internal server error
