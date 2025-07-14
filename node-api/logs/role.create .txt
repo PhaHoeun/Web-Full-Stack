@@ -1,0 +1,12 @@
+[11/07/2025 97:29:45] Error: Column 'Code' cannot be null
+
+[11/07/2025 97:30:38] Error: Column 'Code' cannot be null
+
+[11/07/2025 97:31:28] Error: Column 'Code' cannot be null
+
+[11/07/2025 97:32:00] Error: Column 'Code' cannot be null
+
+[11/07/2025 97:32:36] Error: Column 'Code' cannot be null
+
+[11/07/2025 97:34:52] Error: Column 'Code' cannot be null
+

@@ -1,87 +1,122 @@
-var categoryList = [
-    {
-        id: 1,
-        name: 'Mobile App',
-        des: 'Des Mobile App',
-    },
-    {
-        id: 2,
-        name: 'Back-End',
-        des: 'Des Back-End',
-    },
-];
+const { logError, isEmptyOrNull } = require('../config/service')
+const db = require('../config/db')
 
-const getList = (req, res) => {
-    res.json({
-        list: categoryList,
-    });
+const getList = async (req, res) => {
+    try {
+        const [category] = await db.query('SELECT * FROM category');
+        res.json({
+            category: category,
+        });
+    } catch (e) {
+        logError('category.list', e, res);
+    }
 }
 
-const getDetail = (req, res) => {
-    var id = req.params.id;
-
-    //search item by id
-    var data = [];
-    categoryList.map((item, _) => {
-        if (id == item.id) {
-            data = item;
+const getDetail = async (req, res) => {
+    try {
+        var param = {
+            id: req.params.id,
         }
-    })
-
-    res.json({
-        list: data,
-    });
+        const [category] = await db.query('SELECT * FROM category WHERE id = :id', param);
+        res.json({
+            category: category,
+        });
+    } catch (e) {
+        logError('category.detail', e, res);
+    }
 }
 
-const create = (req, res) => {
-    var body = req.body;
-
-    //add new element from front end to list
-    categoryList.push(body); 
-
-    res.json({
-        message: 'Create Success!',
-        total: categoryList.length,
-        list: categoryList,
-    });
-}
-
-const update = (req, res) => {
-    var body = req.body;
-
-    //update by id
-    categoryList.map((item, idx) => { 
-        if (body.id == item.id) {
-            //process update
-            categoryList[idx].name = body.name;
-            categoryList[idx].des = body.des;
+const create = async (req, res) => {
+    try {
+        var name = req.body.name;
+        var status = req.body.status;
+        var description = req.body.description;
+        
+        //---------validation------------
+        var error = {};
+        if (isEmptyOrNull(name)) {
+            error.name = 'Name is required!';
         }
-    });
-    
-    res.json({
-        message: 'Update Success!',
-        list: categoryList,
-    });
+        // if (sEmptyOrNull(status) {
+        //     error.status = 'Status is required!'
+        // }
+
+        if (Object.keys(error).length > 0) {
+            res.json({
+                error: error,
+            });
+            return false;
+        }
+        //---------validation------------
+
+        var param = {
+            name: name,
+            status: status,
+            description: description,
+        }
+        const [category] = await db.query('INSERT INTO category (name, description, status) VALUES(:name, :description, :status)', param);
+        res.json({
+            message: 'Create Category Successfully!',
+            category: category,
+        });
+    } catch (e) {
+        logError('category.create', e, res);
+    }
 }
 
-const remove = (req, res) => {
-    var id = req.params.id;
-    var data = [];
+const update = async (req, res) => {
+    try {
+        var name = req.body.name;
+        var status = req.body.status;
+        var description = req.body.description;
+        var id = req.params.id;
 
-    //search id to remove
-    categoryList.map((item, idx) => {
-        if (id != item.id) {
-            data.push(item);
+        //---------validate------------
+        var error = {};
+        if (isEmptyOrNull(name)) {
+            error.name = 'Name is required!';
         }
-    });
+        // if (isEmptyOrNull(status)) {
+        //     error.status = 'Status is required!'
+        // }
 
-    //update list
-    categoryList = data;
+        if (Object.keys(error).length > 0) {
+            res.json({
+                error: error,
+            });
+            return false;
+        }
+        //---------validate------------
 
-    res.json({
-        message: 'Remove Success!',
-        list: categoryList,
-   })
+        var param = {
+            id: id,
+            name: name,
+            description: description,
+            status: status,
+        }
+        const [category] = await db.query('UPDATE category SET name = :name, description = :description, status = :status WHERE id = :id', param);
+        res.json({
+            message: 'Create Category Successfully!',
+            category: category,
+        });
+    } catch (e) {
+        logError('category.update', e, res);
+    }
+}
+
+const remove = async (req, res) => {
+    try {
+        var param = {
+            id: req.params.id,
+        };
+        const [category] = await db.query("DELETE FROM category WHERE id = :id", param); //more secure
+        res.json({
+            message: 'Delete Category Successfully!',
+            category: category,
+        });
+    } catch (e) {
+        logError("category.remove ", e, res);
+    }
 }
 
 module.exports = {

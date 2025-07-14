@@ -1,9 +1,10 @@
 const db = require('../config/db')
+const { logError } = require('../config/service')
 
 const getList = async (req, res) => {
     try {
         //query from db
-        const [role] = await db.queryss("SELECT * FROM role;");
+        const [role] = await db.query("SELECT * FROM role;");
         //const [data1] = await db.query("SELECT * FROM customer;");
         // const [data2] = await db.query("SELECT * FROM teacher;");
 
@@ -13,11 +14,7 @@ const getList = async (req, res) => {
             //list2:data2,
         });
     } catch (e) {
-        console.log("error get role list ------->>> : " + e);
-        //send message
-        res.status(500).send({
-            error: "Internal Server Error!"
-        });
+        logError("role.list ", e, res);
     }
 
 }
@@ -36,11 +33,7 @@ const getDetail = async (req, res) => {
         // res.json({
         //     error: e,
         // });
-
-        console.log("error get role detail ------->>> : " + e);
-        res.status(500).send({
-            error: "Internal Server Error!"
-        });
+        logError("role.detail ", e, res);
     }
 }
 
@@ -57,12 +50,9 @@ const create = async (req, res) => {
         });
     } catch (e) {
         // res.json({
-        //     error: e,
+        //     error: e.message,
         // });
-        console.log("error create role ------->>> : " + e);
-        res.status(500).send({
-            error: "Internal Server Error!"
-        });
+        logError("role.create ", e, res);
     }
 }
 
@@ -79,7 +69,7 @@ const update = async (req, res) => {
             role: role,
         });
     } catch (e) {
-        console.log("error update role ------->>> : " + e);
+        logError("role.update ", e, res);
     }
 }
 
@@ -94,10 +84,7 @@ const remove = async (req, res) => {
             role: role,
         });
     } catch (e) {
-        console.log("error delete role ------->>> : " + e);
-        res.status(500).send({
-            error: "Internal Server Error!"
-        });
+        logError("role.remove ", e, res);
     }
 }
 

@@ -11,6 +11,7 @@ const { teacher } = require("./src/route/teacher.route");
 const { student } = require("./src/route/student.route");
 const { category } = require("./src/route/category.route");
 const { role } = require("./src/route/role.route");
+const { user } = require("./src/route/user.route");
 
 
 //call teacher, student route
@@ -18,6 +19,7 @@ teacher(app); //app is from line 3
 student(app); //app is from line 3
 category(app); //app is from line 3
 role(app); //app is from line 3
+user(app); //app is from line 3
 
 
 //run server

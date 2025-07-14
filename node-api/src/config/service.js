@@ -19,8 +19,18 @@ const logError = async (controller, message, res) => {
     res.status(500).send({
         error: 'Internal Server Error!'
     });
+    
+}
+
+const isEmptyOrNull = (value) => {
+    if (value === '' || value === null || value === undefined) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 module.exports = {
     logError,
+    isEmptyOrNull
 }

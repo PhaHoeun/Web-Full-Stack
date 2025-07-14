@@ -1,0 +1,8 @@
+[12/07/2025 147:34:45] Error: Cannot add or update a child row: a foreign key constraint fails (`full_stack`.`user`, CONSTRAINT `user_ibfk_1` FOREIGN KEY (`RoleId`) REFERENCES `Role` (`Id`))
+
+[12/07/2025 157:14:16] Error: Unknown column 'IsActive' in 'field list'
+
+[12/07/2025 157:14:25] Error: Unknown column 'IsActive' in 'field list'
+
+[12/07/2025 157:16:02] Error: Unknown column 'is_ctive' in 'field list'
+

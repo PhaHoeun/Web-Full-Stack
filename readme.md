@@ -174,3 +174,9 @@ node -v : check node version
     - 200: OK
     - 404: Route not found
     - 500: Internal server error
+
+#  CRUD Category
+    - id Int (PK), name varchar(120), description text, status tynyint(1), create_at datetimestamp
+    - creaate table,
+    index.js -> route -> controller (getList, getDetail, create, update, remove)
+

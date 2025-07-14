@@ -1,0 +1,6 @@
+[11/07/2025 97:18:35] TypeError: db.queryss is not a function
+
+[11/07/2025 97:20:00] Error: Table 'full_stack.rolesss' doesn't exist
+
+[11/07/2025 97:34:36] Error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ssSELECT * FROM role' at line 1
+

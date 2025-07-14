@@ -1,0 +1,6 @@
+[12/07/2025 147:26:20] Error: Duplicate entry 'Admin' for key 'Username'
+
+[12/07/2025 147:28:53] Error: Duplicate entry 'Teacher' for key 'Username'
+
+[12/07/2025 147:35:02] Error: Cannot add or update a child row: a foreign key constraint fails (`full_stack`.`user`, CONSTRAINT `user_ibfk_1` FOREIGN KEY (`RoleId`) REFERENCES `Role` (`Id`))
+

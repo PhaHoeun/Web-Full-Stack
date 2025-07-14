@@ -4,10 +4,12 @@ const category = (app) => {
     app.get('/api/category', getList);
     app.get('/api/category/:id', getDetail);
     app.post('/api/category', create);
-    app.put('/api/category', update);
+    app.put('/api/category/:id', update);
     app.delete('/api/category/:id', remove);
 }
 
 module.exports = {
     category,
 }
+
+// create, update, remove
