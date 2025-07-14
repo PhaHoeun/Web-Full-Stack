@@ -13,7 +13,7 @@ const getList = async (req, res) => {
         
         res.json({
             data: {
-                create_at: moment().format('DD-MM-YYYY HH:mm:ss'),
+                created_at: moment().format('DD-MM-YYYY HH:mm:ss'),
                 created_by: req.user.username,
                 user: user
             },
@@ -169,7 +169,7 @@ const logIn = async (req, res) => {
             if (bcript.compareSync(password, user[0].password)) {
                 delete user[0].password; // delete key 'password' to response json
                 //generate jwt
-                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "7d" })
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "12h" })
                 res.json({
                     message: 'Log In Successfully!',
                     user: user[0],

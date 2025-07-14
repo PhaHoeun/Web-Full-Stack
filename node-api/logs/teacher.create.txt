@@ -1,0 +1,32 @@
+[14/07/2025 14:15:33] [object Object]
+
+[14/07/2025 14:17:54] [object Object]
+
+[14/07/2025 14:25:45] [object Object]
+
+[14/07/2025 14:27:47] [object Object]
+
+[14/07/2025 14:28:32] Error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ': email)' at line 1
+
+[14/07/2025 14:31:23] Error: Column 'first_name' cannot be null
+
+[14/07/2025 14:32:40] ReferenceError: log is not defined
+
+[14/07/2025 14:33:26] ReferenceError: log is not defined
+
+[14/07/2025 14:35:18] ReferenceError: log is not defined
+
+[14/07/2025 14:35:43] TypeError: Cannot convert undefined or null to object
+
+[14/07/2025 14:36:13] TypeError: Cannot convert undefined or null to object
+
+[14/07/2025 14:36:28] Error: Column 'first_name' cannot be null
+
+[14/07/2025 14:36:46] Error: Column 'first_name' cannot be null
+
+[14/07/2025 14:36:58] Error: Column 'first_name' cannot be null
+
+[14/07/2025 14:37:50] Error: Column 'first_name' cannot be null
+
+[14/07/2025 14:38:26] Error: Column 'tel' cannot be null
+

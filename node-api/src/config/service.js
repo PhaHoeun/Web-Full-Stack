@@ -58,6 +58,7 @@ const validate_token = () => {
                 } else {
                     req.user = result.data; // write user property
                     req.user_id = result.data.id; // write user property
+                    req.username = result.data.username;
                     next();
                 }
             });

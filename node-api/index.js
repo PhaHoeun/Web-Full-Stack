@@ -20,6 +20,7 @@ student(app); //app is from line 3
 category(app); //app is from line 3
 role(app); //app is from line 3
 user(app); //app is from line 3
+teacher(app); //app is from line 3
 
 
 //run server
