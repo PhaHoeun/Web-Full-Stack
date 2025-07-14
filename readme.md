@@ -175,8 +175,25 @@ node -v : check node version
     - 404: Route not found
     - 500: Internal server error
 
-#  CRUD Category
+# CRUD Category
     - id Int (PK), name varchar(120), description text, status tynyint(1), create_at datetimestamp
     - creaate table,
     index.js -> route -> controller (getList, getDetail, create, update, remove)
 
+# Incrypt password using bcrypt
+    - npm install bcrypt
+    -import: const bcript = require("bcrypt")
+    - create using function: bcript.hashSync(front-end pwd, round)
+    - log in using function: bcript.compareSync(front-end pwd, hasPwd from DB)
+
+# delete key from response json
+    - delete user[0].password; 
+
+# jwt(json web token) access token
+    - npm i jsonwebtoken
+    - import: const jwt = require("jsonwebtoken")
+    - create config file: const { Config } = require('../config/config')
+    //generate jwt
+    - var access_token = await jwt.sign({data: user[0]}, Config.ACCESS_TOKEN_KEY, {expiresIn: "60s"})
+    - create function validate_token
+    

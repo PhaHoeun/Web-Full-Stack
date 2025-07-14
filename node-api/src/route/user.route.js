@@ -1,16 +1,17 @@
 //import
+const { validate_token } = require('../config/service');
 const { getList, getDetail, create, update, remove, logIn } = require('../controller/user.controller')
+
+
 const user = (app) => {
-    app.get('/api/user', getList);
+    app.get('/api/user',validate_token(), getList);
     app.post('/api/user/login', logIn);
-    app.get('/api/user/:id', getDetail);
-    app.post('/api/user', create);
-    app.put('/api/user/:id', update);
-    app.delete('/api/user/:id', remove);
+    app.get('/api/user/:id', validate_token(), getDetail);
+    app.post('/api/user', validate_token(), create);
+    app.put('/api/user/:id', validate_token(), update);
+    app.delete('/api/user/:id', validate_token(), remove);
 }
 
 module.exports = {
     user,
 }
-
-// create, update, remove

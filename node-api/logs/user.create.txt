@@ -4,3 +4,15 @@
 
 [12/07/2025 147:35:02] Error: Cannot add or update a child row: a foreign key constraint fails (`full_stack`.`user`, CONSTRAINT `user_ibfk_1` FOREIGN KEY (`RoleId`) REFERENCES `Role` (`Id`))
 
+[14/07/2025 97:10:31] Error: Data too long for column 'password' at row 1
+
+[14/07/2025 97:11:02] Error: Data too long for column 'password' at row 1
+
+[14/07/2025 97:11:36] Error: Data too long for column 'password' at row 1
+
+[14/07/2025 97:11:55] Error: Data too long for column 'password' at row 1
+
+[14/07/2025 97:13:45] Error: Data too long for column 'password' at row 1
+
+[14/07/2025 97:14:12] Error: Data too long for column 'password' at row 1
+

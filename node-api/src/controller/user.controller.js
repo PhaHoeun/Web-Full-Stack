@@ -1,13 +1,23 @@
 const { logError, isEmptyOrNull } = require('../config/service')
 const db = require('../config/db')
+const bcript = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const { Config } = require('../config/config')
+const moment = require('moment');
 
 //----------get user list ------------
 const getList = async (req, res) => {
     try {
         var sql = "SELECT user.*, role.name AS RoleName FROM user LEFT JOIN role ON(user.role_id = role.id);";
         const [user] = await db.query(sql);
+        
         res.json({
-            user: user,
+            data: {
+                create_at: moment().format('DD-MM-YYYY HH:mm:ss'),
+                created_by: req.user.username,
+                user: user
+            },
+
         });
     } catch (e) {
         logError('user.list', e, res);
@@ -21,8 +31,9 @@ const getDetail = async (req, res) => {
             id: req.params.id,
         }
         const [user] = await db.query('SELECT * FROM user WHERE id = :id', param);
+        delete user[0].password;
         res.json({
-            user: user,
+            user: user[0],
         });
     } catch (e) {
         logError('user.detail', e, res);
@@ -34,6 +45,7 @@ const create = async (req, res) => {
         var username = req.body.username;
         var password = req.body.password;
         var roleId = req.body.role_id;
+        var createdBy = req.user.username;
 
 
         //---------validation------------
@@ -52,13 +64,15 @@ const create = async (req, res) => {
             return false;
         }
         //---------validation------------
+        var hasPwd = bcript.hashSync(password, 10);  //encrypt password
 
         var param = {
             username: username,
-            password: password,
+            password: hasPwd,
             roleId: roleId,
+            createdBy: createdBy,
         }
-        const [user] = await db.query('INSERT INTO user (role_id, username, password) VALUES(:roleId, :username, :password)', param);
+        const [user] = await db.query('INSERT INTO user (role_id, username, password, created_by) VALUES(:roleId, :username, :password, :createdBy)', param);
         res.json({
             message: 'Create user Successfully!',
             user: user,
@@ -91,10 +105,10 @@ const update = async (req, res) => {
             return false;
         }
         //---------validate------------
-
+        var hasPwd = bcript.hashSync(password, 10); //encrypt password
         var param = {
             id: id,
-            password: password,
+            password: hasPwd,
             roleId: roleId,
             isActive: isActive,
         }
@@ -128,7 +142,6 @@ const logIn = async (req, res) => {
         var username = req.body.username;
         var password = req.body.password;
 
-
         //---------validation------------
         var error = {};
         if (isEmptyOrNull(username)) {
@@ -153,10 +166,14 @@ const logIn = async (req, res) => {
 
         const [user] = await db.query("SELECT * FROM user WHERE username =:username", param);
         if (user.length > 0) {
-            if (user[0].password === password) {
+            if (bcript.compareSync(password, user[0].password)) {
+                delete user[0].password; // delete key 'password' to response json
+                //generate jwt
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "7d" })
                 res.json({
                     message: 'Log In Successfully!',
                     user: user[0],
+                    access_token: access_token,
                 });
             } else {
                 res.status(403).json({
@@ -184,6 +201,6 @@ module.exports = {
     create,
     update,
     remove,
-    logIn
+    logIn,
 }
 

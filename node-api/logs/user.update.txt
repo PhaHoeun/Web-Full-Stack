@@ -6,3 +6,5 @@
 
 [12/07/2025 157:16:02] Error: Unknown column 'is_ctive' in 'field list'
 
+[14/07/2025 107:54:48] TypeError: Cannot convert undefined or null to object
+
