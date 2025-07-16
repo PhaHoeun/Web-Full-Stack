@@ -196,4 +196,10 @@ node -v : check node version
     //generate jwt
     - var access_token = await jwt.sign({data: user[0]}, Config.ACCESS_TOKEN_KEY, {expiresIn: "60s"})
     - create function validate_token
+
+# refresh token
+    - create function: refresh_token
+    - route: /api/user/refresh_token
+    - call in postman
+
     

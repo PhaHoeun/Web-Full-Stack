@@ -10,7 +10,7 @@ const getList = async (req, res) => {
     try {
         var sql = "SELECT user.*, role.name AS RoleName FROM user LEFT JOIN role ON(user.role_id = role.id);";
         const [user] = await db.query(sql);
-        
+
         res.json({
             data: {
                 created_at: moment().format('DD-MM-YYYY HH:mm:ss'),
@@ -169,11 +169,13 @@ const logIn = async (req, res) => {
             if (bcript.compareSync(password, user[0].password)) {
                 delete user[0].password; // delete key 'password' to response json
                 //generate jwt
-                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "12h" })
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "60s" });
+                var refresh_token = await jwt.sign({ data: user[0] }, Config.REFRESH_TOKEN);
                 res.json({
                     message: 'Log In Successfully!',
                     user: user[0],
                     access_token: access_token,
+                    refresh_token: refresh_token,
                 });
             } else {
                 res.status(403).json({
@@ -195,6 +197,38 @@ const logIn = async (req, res) => {
     }
 }
 
+const refresh_token = async (req, res) => {
+    try {
+        const {
+            refresh_token,
+        } = req.body;
+        jwt.verify(refresh_token, Config.REFRESH_TOKEN, async (error, result) => {
+            if (error) {
+                res.status(401).send({
+                    message: 'Unautorized',
+                    error: error,
+                });
+            } else {
+                //re-new access_token and refresh_token
+                var user_from_token = result.data;
+                const [user] = await db.query("SELECT * FROM user WHERE id=id", { id: user_from_token.id });
+                delete user[0].password;
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "60s" });
+                var refresh_token = await jwt.sign({ data: user[0] }, Config.REFRESH_TOKEN);
+                res.json({
+                    message: 'Refresh Token Successfully!',
+                    user: user[0],
+                    access_token: access_token,
+                    refresh_token: refresh_token,
+                });
+            }
+        });
+    } catch (e) {
+        logError("user.refresh_token ", e, res);
+    }
+
+}
+
 module.exports = {
     getList,
     getDetail,
@@ -202,5 +236,6 @@ module.exports = {
     update,
     remove,
     logIn,
+    refresh_token,
 }
 

@@ -178,7 +178,6 @@ const update = async (req, res) => {
             is_active,
             id,
         };
-        console.log("param: ", param, " ID: ", id);
         //check existing id, email and phone
         const [findTeacher] = await db.query("SELECT * FROM teacher WHERE (tel = :tel OR email = :email) AND id != :id", param);
         if (findTeacher.length > 0) {
