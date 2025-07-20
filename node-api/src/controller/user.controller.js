@@ -169,7 +169,7 @@ const logIn = async (req, res) => {
             if (bcript.compareSync(password, user[0].password)) {
                 delete user[0].password; // delete key 'password' to response json
                 //generate jwt
-                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "60s" });
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "1d" });
                 var refresh_token = await jwt.sign({ data: user[0] }, Config.REFRESH_TOKEN);
                 res.json({
                     message: 'Log In Successfully!',

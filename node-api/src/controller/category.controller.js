@@ -28,18 +28,19 @@ const getDetail = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        var name = req.body.name;
-        var status = req.body.status;
-        var description = req.body.description;
+        var {
+            name,
+            description,
+            parent_id,
+            image,
+            is_active,
+         } = req.body;
         
         //---------validation------------
         var error = {};
         if (isEmptyOrNull(name)) {
             error.name = 'Name is required!';
         }
-        // if (sEmptyOrNull(status) {
-        //     error.status = 'Status is required!'
-        // }
 
         if (Object.keys(error).length > 0) {
             res.json({
@@ -50,11 +51,14 @@ const create = async (req, res) => {
         //---------validation------------
 
         var param = {
-            name: name,
-            status: status,
-            description: description,
+            name,
+            description,
+            parent_id,
+            image,
+            is_active,
+            created_by: req.user.username,
         }
-        const [category] = await db.query('INSERT INTO category (name, description, status) VALUES(:name, :description, :status)', param);
+        const [category] = await db.query('INSERT INTO category (name, description, parent_id, image, is_active, created_by) VALUES(:name, :description, :parent_id, :image, :is_active, :created_by)', param);
         res.json({
             message: 'Create Category Successfully!',
             category: category,

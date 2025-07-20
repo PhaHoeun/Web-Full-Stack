@@ -1,0 +1,4 @@
+[17/07/2025 15:09:40] Error: Unknown column 'description' in 'field list'
+
+[17/07/2025 15:10:48] Error: Unknown column 'status' in 'field list'
+

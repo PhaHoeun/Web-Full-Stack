@@ -1,20 +1,232 @@
-const getListStudent = (req, res) => {
-    res.send('get list student');
+const db = require('../config/db')
+const { logError, isEmptyOrNull } = require('../config/service')
 
+const getList = async (req, res) => {
+
+    try {
+        //query from db
+        const [student] = await db.query("SELECT * FROM student");
+
+        res.json({
+            student: student,
+
+        });
+    } catch (e) {
+        logError("student.list", e, res);
+    }
 }
-const createStudent = (req, res) => {
-    res.send('create student');
+
+//get student detail
+const getDetail = async (req, res) => {
+    try {
+        var param = {
+            id: req.params.id,
+        };
+        const [student] = await db.query("SELECT * FROM student WHERE id = :id", param); //more secure
+        res.json({
+            student: student[0] || null,
+        });
+    } catch (e) {
+        logError("student.detail", e, res);
+    }
 }
-const updateStudent = (req, res) => {
-    res.send('update student');
+
+//create a student
+const create = async (req, res) => {
+
+    try {
+        var {
+            first_name,
+            last_name,
+            gender,
+            dob,
+            tel,
+            image,
+            email,
+            current_address,
+            note,
+            is_active,
+        } = req.body;
+
+        //validation
+        var error = {};
+        if (isEmptyOrNull(first_name)) {
+            error.first_name = 'First Name is required!';
+        }
+        if (isEmptyOrNull(last_name)) {
+            error.last_name = 'Last Name is required!';
+        }
+        if (isEmptyOrNull(tel)) {
+            error.tel = 'Telephone is required!';
+        }
+        if (Object.keys(error).length > 0) {
+            res.json({
+                error: error,
+            });
+        }
+
+        //param
+        var param = {
+            first_name,
+            last_name,
+            gender,
+            dob,
+            tel,
+            image,
+            email,
+            current_address,
+            note,
+            is_active,
+            created_by: req.username
+        };
+
+        //check existing
+        const [findStudent] = await db.query("SELECT * FROM student WHERE (tel = :tel OR email = :email)", param);
+        if (findStudent.length > 0) {
+            res.status(403).json({
+                message: "Telephone or Email already exist! Please try others!",
+            });
+        } else {
+            const [student] = await db.query(`INSERT INTO student 
+            (
+                first_name, 
+                last_name, 
+                gender, 
+                dob, 
+                tel, 
+                image, 
+                email, 
+                current_address, 
+                note, 
+                is_active, 
+                created_by
+            )
+            VALUES
+            (
+                :first_name, 
+                :last_name, 
+                :gender, 
+                :dob, 
+                :tel, 
+                :image, 
+                :email, 
+                :current_address, 
+                :note, 
+                :is_active, 
+                :created_by
+            )`, param);
+            res.json({
+                message: 'Create student Successfully!',
+                student: student,
+            });
+        }
+
+    } catch (e) {
+        logError("student.create", e, res);
+    }
 }
-const deleteStudent = (req, res) => {
-    res.send('delete student');
+
+//update a student
+const update = async (req, res) => {
+    try {
+        var {
+            first_name,
+            last_name,
+            gender,
+            dob,
+            tel,
+            image,
+            email,
+            current_address,
+            note,
+            is_active,
+        } = req.body;
+        var id = req.params.id;
+
+        //validation
+        var error = {};
+        if (isEmptyOrNull(id)) {
+            error.id = 'Id is required!';
+        }
+        if (isEmptyOrNull(first_name)) {
+            error.first_name = 'First Name is required!';
+        }
+        if (isEmptyOrNull(last_name)) {
+            error.last_name = 'Last Name is required!';
+        }
+        if (isEmptyOrNull(tel)) {
+            error.tel = 'Telephone is required!';
+        }
+        if (Object.keys(error).length > 0) {
+            res.json({
+                error: error,
+            });
+        }
+
+        //param
+        var param = {
+            first_name,
+            last_name,
+            gender,
+            dob,
+            tel,
+            image,
+            email,
+            current_address,
+            note,
+            is_active,
+            id,
+        };
+        //check existing id, email and phone
+        const [findStudent] = await db.query("SELECT * FROM student WHERE (tel = :tel OR email = :email) AND id != :id", param);
+        if (findStudent.length > 0) {
+            res.status(403).json({
+                message: "Telephone or Email already exist! Please try others!",
+            });
+        } else {
+            const [student] = await db.query(`UPDATE student SET
+                first_name=:first_name, 
+                last_name=:last_name, 
+                gender=:gender, 
+                dob=:dob, 
+                tel=:tel, 
+                image=:image, 
+                email=:email, 
+                current_address=:current_address, 
+                note=:note, 
+                is_active=:is_active
+                WHERE id=:id
+            `, param);
+            res.json({
+                message: 'Update student Successfully!',
+                student: student,
+            });
+        }
+    } catch (e) {
+        logError("student.update", e, res);
+    }
+}
+
+//delete a student
+const remove = async (req, res) => {
+    try {
+        var param = {
+            id: req.params.id,
+        };
+        const [student] = await db.query("DELETE FROM student WHERE id = :id", param); //more secure
+        res.json({
+            message: 'Delete student Successfully!',
+            student: student,
+        });
+    } catch (e) {
+        logError("student.remove", e, res);
+    }
 }
 
 module.exports = {
-    getListStudent,
-    createStudent,
-    updateStudent,
-    deleteStudent
+    getList,
+    create,
+    update,
+    remove,
+    getDetail
 };

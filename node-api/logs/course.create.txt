@@ -1,0 +1,4 @@
+[17/07/2025 15:16:16] Error: Incorrect integer value: '' for column `full_stack`.`course`.`image` at row 1
+
+[17/07/2025 15:18:27] Error: Out of range value for column 'price' at row 1
+

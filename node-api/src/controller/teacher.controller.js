@@ -1,4 +1,3 @@
-const { escape } = require('mysql2');
 const db = require('../config/db')
 const { logError, isEmptyOrNull } = require('../config/service')
 
