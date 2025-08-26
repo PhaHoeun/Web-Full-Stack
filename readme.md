@@ -1,5 +1,5 @@
 node -v : check node version
-- Create mmainnn folder "full-stack"
+- Create main folder "full-stack"
 # init node
     - create folder "node-api"
     - create a file 'index.js' in node-api
