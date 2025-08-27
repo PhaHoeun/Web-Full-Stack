@@ -180,14 +180,14 @@ const logIn = async (req, res) => {
             } else {
                 res.status(403).json({
                     error: {
-                        username: "password is incorrect!"
+                        message: "password is incorrect!"
                     }
                 });
             }
         } else {
             res.status(403).json({
                 error: {
-                    username: "username doesn't exist!"
+                    message: "username doesn't exist!"
                 }
             });
         }
@@ -213,7 +213,7 @@ const refresh_token = async (req, res) => {
                 var user_from_token = result.data;
                 const [user] = await db.query("SELECT * FROM user WHERE id=id", { id: user_from_token.id });
                 delete user[0].password;
-                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "60s" });
+                var access_token = await jwt.sign({ data: user[0] }, Config.ACCESS_TOKEN_KEY, { expiresIn: "1d" });
                 var refresh_token = await jwt.sign({ data: user[0] }, Config.REFRESH_TOKEN);
                 res.json({
                     message: 'Refresh Token Successfully!',
