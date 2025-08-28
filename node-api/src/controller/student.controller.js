@@ -223,10 +223,171 @@ const remove = async (req, res) => {
     }
 }
 
+//student register
+const studentRegister = async (req, res) => {
+    try {
+        var {
+            class_room_id,
+            student_id,
+            discount,
+            discount_price,
+            total_to_pay,
+            is_completed_paid,
+            note,
+        } = req.body;
+
+        //validation
+        var error = {};
+        if (isEmptyOrNull(class_room_id)) {
+            error.class_room_id = 'Class Room is required!';
+        }
+        if (isEmptyOrNull(student_id)) {
+            error.student_id = 'Student is required!';
+        }
+        if (isEmptyOrNull(total_to_pay)) {
+            error.total_to_pay = 'Total to pay is required!';
+        }
+        if (Object.keys(error).length > 0) {
+            res.json({
+                error: error,
+            });
+            return false;
+        }
+
+        var param = {
+            class_room_id,
+            student_id,
+            discount,
+            discount_price,
+            total_to_pay,
+            is_completed_paid,
+            note,
+            created_by: req.username,
+        };
+        const [register] = await db.query(`INSERT INTO student_register
+        (
+            class_room_id,
+            student_id,
+            discount,
+            discount_price,
+            total_to_pay,
+            is_completed_paid,
+            note,
+            created_by
+        )
+        VALUES
+        (
+            :class_room_id,
+            :student_id,
+            :discount,
+            :discount_price,
+            :total_to_pay,
+            :is_completed_paid,
+            :note,
+            :created_by
+        )`, param);
+        res.json({
+            message: 'Student register successfully!',
+            register: register,
+        });
+    } catch (e) {
+        logError("student.register", e, res);
+    }
+}
+
+//student payment
+const studentPayment = async (req, res) => {
+    try {
+        var {
+            id,
+            class_room_id,
+            student_id,
+            Payment,
+            payment_method,
+            payment_date,
+            note,
+            image_ref,
+            created_by,
+            created_at
+        } = req.body;
+        //validation
+        var error = {};
+        if (isEmptyOrNull(id)) {
+            error.id = 'Id is required!';
+        }
+        if (isEmptyOrNull(class_room_id)) {
+            error.class_room_id = ' Class Room is required!';
+        }
+        if (isEmptyOrNull(student_id)) {
+            error.student_id = 'Student is required!';
+        }
+        if (isEmptyOrNull(Payment)) {
+            error.Payment = 'Payment is required!';
+        }
+        if (isEmptyOrNull(payment_method)) {
+            error.payment_method = 'Payment method is required!';
+        }
+        if (isEmptyOrNull(payment_date)) {
+            error.payment_date = 'Payment date is required!';
+        }
+        if (Object.keys(error).length > 0) {                                                        
+            res.json({
+                error: error,
+            });
+            return false;
+        }
+        var param = {
+            id,
+            class_room_id,
+            student_id,
+            Payment,
+            payment_method,
+            payment_date,
+            note,
+            image_ref,
+            created_by: req.username,
+            
+        };
+        const [payment] = await db.query(`INSERT INTO student_payment
+        (
+            id,
+            class_room_id,
+            student_id,
+            Payment,
+            payment_method,
+            payment_date,
+            note,
+            image_ref, 
+            created_by
+        )
+        VALUES
+        (
+            :id,
+            :class_room_id,
+            :student_id,
+            :Payment,
+            :payment_method,
+            :payment_date,
+            :note,
+            :image_ref, 
+            :created_by,
+        )`, param);
+        res.json({
+            message: 'Student payment successfully!',
+            payment: payment,
+        });
+    } catch (e) {
+        logError("student.payment", e, res)
+    }
+}
+
+
 module.exports = {
     getList,
     create,
     update,
     remove,
-    getDetail
+    getDetail,
+    studentRegister,
+    studentPayment
 };
