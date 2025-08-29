@@ -1,3 +1,6 @@
+```javascript 
+//code color highlight
+
 node -v : check node version
 - Create main folder "full-stack"
 # init node
@@ -202,4 +205,6 @@ node -v : check node version
     - route: /api/user/refresh_token
     - call in postman
 
-    
+
+
+```
