@@ -14,7 +14,6 @@ const MainLayout = () => { //Outlet is property
     return (
         <div >
             <div>
-
                 <ul className={styles.menu}>
                     <li className={styles.logo}>
                         <Link to="/">
