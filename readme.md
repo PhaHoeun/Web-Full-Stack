@@ -221,4 +221,39 @@ node -v : check node version
             }
             export default HomePage;    
 
+# Create layout
+    - Create file MainLayout.js
+        import { Outlet } from "react-router-dom";
+        const MainLayout = () => { //Outlet is property
+            return (
+                <div >
+                    <div style={{ height: 60, backgroundColor: 'gray' }}>
+                        <div>Main Layout</div>
+                    </div>
+                    <button>
+                        Click Me
+                    </button>
+                    <div>
+                        <Outlet />
+                    </div>
+                </div>
+            );
+        };
+
+        export default MainLayout;
+    - Using in App.js
+        <Route element={<MainLayout />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/student' element={<StudentPage />} />
+          <Route path='/teacher' element={<TeacherPage />} />
+          <Route path='*' element={<h1>404 Not Found</h1>} />
+        </Route>
+    - Add style by create file MainLayout.module.css
+    - in MainLayout.js
+        +  Outlet : use to show body in below layout 
+        + Link : use for link
+        + useNavigate : use for route
+        
+
 ```
