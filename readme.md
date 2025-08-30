@@ -1,6 +1,6 @@
 ```javascript 
 //code color highlight
-
+----------------------------------------------------------- Node.JS, Back-End, API----------------------------------------------------------
 node -v : check node version
 - Create main folder "full-stack"
 # init node
@@ -205,6 +205,20 @@ node -v : check node version
     - route: /api/user/refresh_token
     - call in postman
 
-
+---------------------------------------------- Rect.JS, Front-End, Web -----------------------------------------------------------------------
+# Configure Route in App.js
+    > npm install react-router-dom
+    + Create Sub Folder in src 
+        - home, about, student, ....
+    + Create file in Sub Folder
+        - HomePage.js 
+            const HomePage = () => { 
+                return (
+                    <div>
+                        <h1>Home Page</h1>
+                    </div>
+                )
+            }
+            export default HomePage;    
 
 ```

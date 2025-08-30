@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './page/home/HomePage';
+import AboutPage from './page/about/AboutPage';
+import StudentPage from './page/student/StudentPage';
+import TeacherPage from './page/teacher/TeacherPage';
 
 function App() {
   return (
-    <div>
-      <h2>Welcome To React.js</h2>
-      <img src={logo}></img>
-      <div className='Hello'>
-        <h5>Testing</h5>
-        <label>Label</label>
-        <button>Button</button>
-        <input />
-        <br />
-        <br />
-        <div style={{ fontSize: 32, backgroundColor: 'Red', padding: 10 }}>Hello</div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/student' element={<StudentPage />} />
+        <Route path='/teacher' element={<TeacherPage />} />
+        <Route path='*' element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 
 export default App;
