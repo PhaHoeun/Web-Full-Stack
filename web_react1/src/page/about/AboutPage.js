@@ -1,7 +1,10 @@
 import styles from './AboutPage.module.css';
 import img1 from './images/Im-Yoon-Ah.jpg';
-import img2 from './images/B-Rak.jpg';
-import img3 from './images/B-Hany.jpg';
+import rak from './images/B-Rak.jpg';
+import ny from './images/B-Hany.jpg';
+import nith from './images/nith.jpg';
+import ra from './images/dara.jpg';
+
 
 const AboutPage = () => {
     return (
@@ -16,37 +19,60 @@ const AboutPage = () => {
 
             <div className={styles.allCard}>
                 <div className={styles.card}>
-                    <img src={img1} alt="Jane" style={{ height: 300, width: "100%" }} />
+                    <img src={img1} alt="Jane" />
                     <div className={styles.container}>
                         <h2>Im Yoon-Ah</h2>
                         <p className={styles.title}>CEO & Founder</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p className={styles.des}>Some text that describes me lorem ipsum ipsum lorem.</p>
                         <p>jane@example.com</p>
                         <p><button className={styles.button}>Contact</button></p>
                     </div>
                 </div>
 
                 <div className={styles.card}>
-                    <img src={img2} alt="B Rak" style={{ height: 300, width: "100%" }} />
+                    <img src={rak} alt="B Rak" />
                     <div className={styles.container}>
                         <h2>Lay Virak</h2>
                         <p className={styles.title}>Mobile Developer Team Lead</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p className={styles.des}>Some text that describes me lorem ipsum ipsum lorem.</p>
                         <p>mike@example.com</p>
                         <p><button className={styles.button}>Contact</button></p>
                     </div>
                 </div>
 
                 <div className={styles.card}>
-                    <img src={img3} alt="B Hany" style={{ height: 300, width: "100%" }} />
+                    <img src={ny} alt="B Hany" />
                     <div className={styles.container}>
                         <h2>Sreng Hany</h2>
                         <p className={styles.title}>Mobile App Developer</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p className={styles.des}>Some text that describes me lorem ipsum ipsum lorem.</p>
                         <p>john@example.com</p>
                         <p><button className={styles.button}>Contact</button></p>
                     </div>
                 </div>
+
+                <div className={styles.card}>
+                    <img src={nith} alt="Ah Nith" />
+                    <div className={styles.container}>
+                        <h2>Ah Nith</h2>
+                        <p className={styles.title}>Mobile App Developer</p>
+                        <p className={styles.des}>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p>john@example.com</p>
+                        <p><button className={styles.button}>Contact</button></p>
+                    </div>
+                </div>
+                
+                <div className={styles.card}>
+                    <img src={ra} alt="Ra Smach" />
+                    <div className={styles.container}>
+                        <h2>Ra Smach</h2>
+                        <p className={styles.title}>Mobile App Developer</p>
+                        <p className={styles.des}>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p>john@example.com</p>
+                        <p><button className={styles.button}>Contact</button></p>
+                    </div>
+                </div>
+
             </div>
         </>
     );

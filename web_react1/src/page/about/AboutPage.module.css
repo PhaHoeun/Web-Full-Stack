@@ -1,9 +1,15 @@
 .allCard {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 40px;
+    flex-direction: row;
+    gap: 16px;
+    /* spacing between cards */
+    overflow-x: auto;
+    /* horizontal scroll */
+    white-space: nowrap;
+    /* prevent wrapping */
+    padding: 16px;
+    scroll-behavior: smooth;
+    /* optional smooth scroll */
     background-color: #f3f3f3;
 }
 
@@ -35,10 +41,22 @@
     text-align: center;
 }
 
+.des {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    white-space: normal;
+}
+
 .card img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 300px;
+    /* or any fixed height you want */
+    object-fit: cover;
+    /* makes image fill without distortion */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .button {
@@ -56,6 +74,11 @@
 
 .button:hover {
     background-color: #24a3c0;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    transition: transform 0.5s ease;
 }
 
 /* Responsive */
