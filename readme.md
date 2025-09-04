@@ -253,7 +253,28 @@ node -v : check node version
     - in MainLayout.js
         +  Outlet : use to show body in below layout 
         + Link : use for link
-        + useNavigate : use for route
+        + useNavigate : use for route 
+
+# React State
+    - for storing data in memory
+    - const [value1, setValue1] = useState(); // declare state variable
+        + value1: state name
+        + setValue1: setter
+        + useState() : function define to variable, we can use:
+            useState([]), or useState(0), or useState("")
+    - usage:  <h1>{value1}</h1>
+    - Object Sate
+        + const [state, setState] = useState({ name: 'John', age: 30 }); // Object State
+        + Usage:
+            <p>Name:{state.name},  Age:{state.age}</p>
+            <button onClick={onClickChangeName}>Change Name</button>
+        + Function: 
+            const onClickChangeName = () => {
+                setState({
+                    ...state, //រក្សា state ចាស់
+                    name: 'Jane'
+                }); // Object State
+            };
         
 
 ```

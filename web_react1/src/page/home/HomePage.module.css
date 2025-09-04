@@ -1,0 +1,7 @@
+.container{     /* by class */
+    page: 10px;
+}
+
+#id { /*by id */
+    margin: 10px;
+}
