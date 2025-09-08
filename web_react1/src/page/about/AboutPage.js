@@ -1,9 +1,9 @@
 import styles from './AboutPage.module.css';
-import img1 from './images/Im-Yoon-Ah.jpg';
-import rak from './images/B-Rak.jpg';
-import ny from './images/B-Hany.jpg';
-import nith from './images/nith.jpg';
-import ra from './images/dara.jpg';
+import img1 from '../../assets/images/Im-Yoon-Ah.jpg';
+import rak from '../../assets/images/B-Rak.jpg';
+import ny from '../../assets/images/B-Hany.jpg';
+import nith from '../../assets/images/nith.jpg';
+import ra from '../../assets/images/dara.jpg';
 
 
 const AboutPage = () => {

@@ -275,6 +275,65 @@ node -v : check node version
                     name: 'Jane'
                 }); // Object State
             };
-        
+
+# Component
+        import styles from './styles.module.css';
+
+        const ProductCart = ({
+            productName,
+            description,
+            price,
+            stock,
+            image
+        }) => {
+            return (
+                <div className={styles.container}>
+                    <img src={image} alt='My Wife' width={150} height={200} />
+                    <div className={styles.productName} >{productName}</div>
+                    <div className={styles.description}>{description}</div>
+                    <div className={styles.price}>{price}$</div>
+                    <div>Stock: {stock}</div>
+                    <button style={{ borderRadius: 5, marginTop: 10 }} >Add to Cart</button>
+                </div>
+            );
+        }
+
+        export default ProductCart;
+    - Usage: 
+        + List:     
+            const dataProduct = [
+                {
+                    id: 1,
+                    product_name: 'Woomen Jean',
+                    des: "Des ...",
+                    price: 10,
+                    stock: 1,
+                    image: require('../../assets/images/Im-Yoon-Ah.jpg'),
+                },
+                {
+                    id: 1,
+                    product_name: 'Woomen Shoe',
+                    des: "Des ...",
+                    price: 5,
+                    stock: 22,
+                    image: require('../../assets/images/nith.jpg'),
+                },
+                {
+                    id: 1,
+                    product_name: 'Woomen Skirt',
+                    des: "Des ...",
+                    price: 3,
+                    stock: 12,
+                    image: require('../../assets/images/B-Hany.jpg'),
+                }
+            ]
+        + State:    
+             const [list, setList] = useState(dataProduct);
+        + Call:     
+            <div style={{ marginTop: 100, textAlign: "center", display: "flex", flexDirection: "row" }} >
+                {list.map((item, idx) =>
+                    <ProductCart image={item.image} productName={item.product_name} description={item.des} price={item.price} stock={item.stock} />
+                )}
+            </div>
 
 ```

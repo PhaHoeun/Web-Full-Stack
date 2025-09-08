@@ -1,0 +1,12 @@
+.container{
+    padding: 20px;
+    width: 150px;
+    background-color: rgb(194, 215, 221);
+    margin: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.productName {
+    font-weight: bold;
+}
