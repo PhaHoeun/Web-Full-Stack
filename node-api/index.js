@@ -1,10 +1,12 @@
 //import express
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 //use request by body 
 app.use(express.json()) //for parsing applicatoin/json
 app.use(express.urlencoded({ extended: true })) //for parsing application/x-www-form-urlencoded
+app.use(cors({ origin: "*" })); //allow krob site
 
 //import  teacher route
 const { teacher } = require("./src/route/teacher.route");

@@ -155,6 +155,7 @@ const logIn = async (req, res) => {
         if (Object.keys(error).length > 0) {
             res.status(403).json({
                 error: error,
+
             });
             return false;
         }
@@ -179,7 +180,7 @@ const logIn = async (req, res) => {
                     refresh_token: refresh_token,
                 });
             } else {
-                res.status(403).json({
+                res.status(403).json({ //if u want to show on console on web remove state(403)
                     error: {
                         message: "password is incorrect!"
                     }

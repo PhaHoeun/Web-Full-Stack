@@ -6,3 +6,35 @@
 
 [12/07/2025 147:11:21] Error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' Password ='Hello@123'' at line 1
 
+[09/09/2025 14:53:32] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 14:53:50] Error
+
+[09/09/2025 14:54:37] Error
+
+[09/09/2025 14:58:50] Error
+
+[09/09/2025 15:00:20] Error
+
+[09/09/2025 15:09:51] Error
+
+[09/09/2025 15:12:59] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:13:49] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:14:00] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:15:26] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:22:29] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:22:50] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:23:34] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:26:55] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:29:23] TypeError: Cannot read properties of undefined (reading 'username')
+
+[09/09/2025 15:30:47] TypeError: Cannot read properties of undefined (reading 'username')
+

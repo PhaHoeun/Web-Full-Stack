@@ -1,0 +1,21 @@
+.loginContainer {
+    width: 350px;
+    height: 350px;
+    padding: 20px;
+    border: solid 1px #eee;
+    border-radius: 10px;
+    background-color: rgb(238, 240, 244);
+    margin: auto;
+    margin-top: 150px;
+}
+
+.registerButton {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.loginTxt{
+    text-align: center;
+    margin-top: 10px;
+    /* font-family: 'Times New Roman', Times, serif; */
+}

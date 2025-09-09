@@ -336,4 +336,49 @@ node -v : check node version
                 )}
             </div>
 
+# Install Library: 
+    got to root project web_react1
+    - react boostrap:
+        + npm install react-bootstrap bootstrap
+    - Ant Desgin:
+        + npm install antd --save
+    - Ant Desgin Icon:
+        + npm install @ant-design/icons@5.x --save
+    - Code:
+        import { Button, Flex } from 'antd';
+        import { SaveOutlined } from '@ant-design/icons';
+
+        const StudentPage = () => {
+            return (
+                < style={{ marginTop: 100, textAlign: "center"}}>
+
+                    <h1>Student Page</h1>
+                    {/* call button */}
+                    <Button>Primary</Button>
+                    <Button type="primary">Primary</Button>
+                    <Button type="dashed">Dashed</Button>
+                    <Button type="link">Download</Button>
+
+                    {/* call icons */}
+                    <Button>
+                        <SaveOutlined/>
+                    </Button>
+                    <Button icon={<SaveOutlined/>}>Save</Button>
+                </>
+
+            )
+
+        }
+
+
+        export default StudentPage;    
+    - Library integrate with api
+        + npm install axios
+        + code in:  ./util/request.js
+    - allow all site for api 
+        + npm install cors
+        + node-api/index.js: app.use(cors({ origin: "*" }));
+
+    
+
 ```
