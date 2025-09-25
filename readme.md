@@ -379,6 +379,15 @@ node -v : check node version
         + npm install cors
         + node-api/index.js: app.use(cors({ origin: "*" }));
 
+#LogIn
+    - route after login success: 
+        + window.location.href = "/admin";  
+        + create funtion for store data in localstorag in /util/service.js
+    - protect route if not log in
+        + if (!getIsLogin()) {
+            window.location.href = '/login';
+          }
+
     
 
 ```

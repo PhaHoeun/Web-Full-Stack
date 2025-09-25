@@ -180,14 +180,14 @@ const logIn = async (req, res) => {
                     refresh_token: refresh_token,
                 });
             } else {
-                res.status(403).json({ //if u want to show on console on web remove state(403)
+                res.json({ //if u want to show on console on web remove state(403)  res.status(403).json
                     error: {
                         message: "password is incorrect!"
                     }
                 });
             }
         } else {
-            res.status(403).json({
+            res.json({
                 error: {
                     message: "username doesn't exist!"
                 }

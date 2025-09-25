@@ -5,12 +5,13 @@ import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import { Link } from "react-router-dom";
 import { request } from '../../util/request'
 import { useState } from 'react';
+import { setIsLogin, setToken, setUser, setRefreshToken } from '../../util/service';
 
 
 const LoginPage = () => {
     const [message, setMessage] = useState();
     const onFinish = async (values) => {
-        
+
         var param = {
             "username": values.username,
             "password": values.password,
@@ -20,11 +21,25 @@ const LoginPage = () => {
         const res = await request("user/login", "post", param);
         if (res.message) {
             setMessage(res.message);
+            setUser(JSON.stringify(res.user)); //JSON.stringify(res.user) convert jsonObj to jsonString
+            setIsLogin("1");
+            setToken(res.access_token);
+            setRefreshToken(res.refresh_token);
+            //if login success route to admin page
+            window.location.href = "/admin";
+
+        } else if (res.error) {
+            if (res.error.username) {
+                setMessage(res.error.username);
+            }
+            if (res.error.password) {
+                setMessage(res.error.password);
+            }
         }
     };
     return (
         <div className={styles.loginContainer}>
-            <h1 className={styles.loginTxt}>Log In :  { message }</h1>
+            <h1 className={styles.loginTxt}>Log In</h1>
             <Form
                 name="login"
                 initialValues={{ remember: true }}

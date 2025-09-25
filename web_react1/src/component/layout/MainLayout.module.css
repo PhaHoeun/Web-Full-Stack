@@ -5,7 +5,7 @@
     overflow: hidden;
     border: 1px solid #e7e7e7;
     background-color: #f3f3f3;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
 }
 
@@ -24,7 +24,7 @@
 .item a {
     font-size: 20px;
     display: block;
-    color: #666;
+    color: #fffcfc;
     font-weight: 500;
     text-align: center;
     padding: 14px 16px;
