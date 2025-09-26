@@ -51,8 +51,10 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Dropdown, Layout, Menu, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
+import styles from './AdminLayout.module.css';
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
@@ -62,7 +64,7 @@ function getItem(label, key, icon, children) {
         label,
     };
 }
-const items = [
+const itemsMenu = [
     getItem('Dashboard', '/admin', <PieChartOutlined />),
     getItem('Teacher', '/admin/teacher', <DesktopOutlined />),
     getItem('Student', '/admin/student', <UserOutlined />
@@ -76,14 +78,35 @@ const items = [
     getItem('Team', 'sub2', <TeamOutlined />),
     getItem('Files', '9', <FileOutlined />),
 ];
+
+const items = [
+    {
+        key: '1',
+        label: 'Profile',
+        icon: <UserOutlined />,
+    },
+    {
+        key: '',
+        label: 'Change Password',
+        icon: <DesktopOutlined />,
+    },
+    {
+        key: 'logout',
+        label: 'Log Out',
+        icon: <PieChartOutlined />,
+        danger: true,
+    },
+];
+
+
 const AdminLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
-    
-    const onClickMenu = (param) => { 
+
+    const onClickMenu = (param) => {
         console.log('click ', param);
         navigate(param.key);
     };
@@ -93,10 +116,37 @@ const AdminLayout = () => {
         <Layout style={{ minHeight: '100vh' }}>
             <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
                 <div className="demo-logo-vertical" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={onClickMenu}/>
+                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={itemsMenu} onClick={onClickMenu} />
             </Sider>
             <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer }} />
+                {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
+                <div className={styles.headerContainer}>
+                    <div className={styles.headerG1}>
+                        <div className={styles.logo}>
+                            <div style={{color: 'white'}}>HP</div>
+                        </div>
+                        <div>
+                            <div className={styles.brandName}>Hoeun Pha</div>
+                            <div className={styles.subBrandName}>Build IT Skill</div>
+                        </div>
+                    </div>
+                    <div className={styles.headerG2}>
+                        {/* <div className={styles.userImage}> */}
+                            <div>
+                            <img className={styles.userImage} src={require("../../assets/images/Im-Yoon-Ah.jpg")} alt='user'/>
+                            </div>
+                        {/* </div> */}
+                        <Dropdown
+                            menu={{ items }}
+                        >
+                            <div>
+                                <div className={styles.username} >Admin</div>
+                                <div className={styles.roleName}>Mobile App Developer</div>
+                            </div>
+                        </Dropdown>
+                    </div>
+
+                </div>
                 <Content style={{ margin: '10px' }}>
                     {/* <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'User' }, { title: 'Bill' }]} /> */}
                     <div
