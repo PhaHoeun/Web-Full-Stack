@@ -7,12 +7,12 @@
 //     // const navigate = useNavigate();
 //     const user = getUser();
 
-//     if (!getIsLogin()) {
-//         window.location.href = '/login';
-//     }
-//     if (!user) {
-//         return null;
-//     }
+// if (!getIsLogin()) {
+//     window.location.href = '/login';
+// }
+// if (!user) {
+//     return null;
+// }
 
 //     const onLogOut = () => {
 //         logOut();
@@ -43,7 +43,8 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getIsLogin, getToken, getUser, logOut } from "../../util/service";
 import {
     DesktopOutlined,
     FileOutlined,
@@ -51,11 +52,11 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Dropdown, Layout, Menu, theme } from 'antd';
+import { Dropdown, Layout, Menu, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './AdminLayout.module.css';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
         key,
@@ -95,15 +96,32 @@ const items = [
         label: 'Log Out',
         icon: <PieChartOutlined />,
         danger: true,
+        onClick: () => {
+            logOut();
+        },
     },
 ];
 
 
 const AdminLayout = () => {
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+
+    const user = getUser();
+
+    useEffect(() => {
+        if (!getIsLogin()) {
+            window.location.href = '/login';
+        }
+    }, []);
+
+
+    if (!user) {
+        return null;
+    }
 
 
     const onClickMenu = (param) => {
@@ -111,7 +129,7 @@ const AdminLayout = () => {
         navigate(param.key);
     };
 
-    const navigate = useNavigate();
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
@@ -123,18 +141,18 @@ const AdminLayout = () => {
                 <div className={styles.headerContainer}>
                     <div className={styles.headerG1}>
                         <div className={styles.logo}>
-                            <div style={{color: 'white'}}>HP</div>
+                            <div style={{ color: 'white' }}>ITH</div>
                         </div>
                         <div>
-                            <div className={styles.brandName}>Hoeun Pha</div>
+                            <div className={styles.brandName}>IT HUB</div>
                             <div className={styles.subBrandName}>Build IT Skill</div>
                         </div>
                     </div>
                     <div className={styles.headerG2}>
                         {/* <div className={styles.userImage}> */}
-                            <div>
-                            <img className={styles.userImage} src={require("../../assets/images/Im-Yoon-Ah.jpg")} alt='user'/>
-                            </div>
+                        <div>
+                            <img className={styles.userImage} src={require("../../assets/images/Im-Yoon-Ah.jpg")} alt='user' />
+                        </div>
                         {/* </div> */}
                         <Dropdown
                             menu={{ items }}
